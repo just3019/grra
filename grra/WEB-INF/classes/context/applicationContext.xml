@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd
+			http://www.springframework.org/schema/context
+       		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 让Spring通过自动扫描来查询和管理Bean -->
+	<context:component-scan base-package="com.slh">
+		<!-- 扫描Component,service,repository等-->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+	<!-- 读取系统属性配置信息 -->
+	<bean id="propertyConfigurer" class="com.slh.core.commons.CustomPropertyPlaceholder">
+		<property name="locations">
+			<list>
+				<value>classpath:conf/jdbc.properties</value>
+				<value>classpath:conf/hibernate.properties</value>
+				<value>classpath:resource/messages.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 全局线程池 -->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
+	      p:corePoolSize="5" p:maxPoolSize="10" p:queueCapacity="25" p:waitForTasksToCompleteOnShutdown="true" />
+
+
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+               <value>resource/messages</value>
+               <value>resource/errors</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

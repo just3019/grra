@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.slh.entity">
+	<class name="Contact" table="contact" catalog="grra">
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="50">
+				<comment>主键</comment>
+			</column>
+			<generator class="uuid" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="NAME">
+				<comment>名字</comment>
+			</column>
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="EMAIL">
+				<comment>邮箱地址</comment>
+			</column>
+		</property>
+		<property name="message" type="java.lang.String">
+			<column name="MESSAGE">
+				<comment>内容</comment>
+			</column>
+		</property>
+		<property name="type" type="java.lang.String">
+			<column name="TYPE">
+				<comment>类型：1原创，2转载，3翻译</comment>
+			</column>
+		</property>
+		<property name="status" type="java.lang.String">
+			<column name="STATUS">
+				<comment>状态</comment>
+			</column>
+		</property>
+		<property name="createtime" type="java.util.Date">
+			<column name="CREATETIME">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="updatetime" type="java.util.Date">
+			<column name="UPDATETIME">
+				<comment>更新时间</comment>
+			</column>
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK">
+				<comment>备注</comment>
+			</column>
+		</property>
+
+
+		<!--<many-to-one name="parentCategory" column="PARENT_ID" class="Category" insert="false" update="false" lazy="false" />-->
+		<!--<set name="brands" table="category_brand" lazy="false">-->
+        	<!--<key column="CATEGORY_ID"/>-->
+        	<!--<many-to-many column="BRAND_ID" class="Brand"/>-->
+        <!--</set>-->
+	</class>
+</hibernate-mapping>
